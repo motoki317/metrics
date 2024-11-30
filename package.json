@@ -15,7 +15,6 @@
     "preview": "node .github/scripts/preview.mjs",
     "linter": "eslint source/**/*.mjs --quiet",
     "dev": "nodemon source/app/web/index.mjs -e mjs,css,ejs,json",
-    "postinstall": "node node_modules/puppeteer/install.js",
     "indepth": "node source/plugins/languages/analyzers.mjs"
   },
   "repository": {
@@ -56,7 +55,7 @@
     "open-graph-scraper": "^6.2.2",
     "png-js": "^1.0.0",
     "prismjs": "^1.29.0",
-    "puppeteer": "^21.2.1",
+    "puppeteer": "^23.9.0",
     "purgecss": "^5.0.0",
     "rss-parser": "^3.13.0",
     "sanitize-html": "^2.11.0",

@@ -45,12 +45,12 @@ export const puppeteer = {
   async launch() {
     return _puppeteer.launch({
       headless: this.headless,
-      executablePath: process.env.PUPPETEER_BROWSER_PATH,
-      args: this.headless ? ["--no-sandbox", "--disable-extensions", "--disable-setuid-sandbox", "--disable-dev-shm-usage"] : [],
+      executablePath: process.env.PUPPETEER_EXECUTABLE_PATH,
+      args: this.headless ? ["--no-sandbox", "--disable-extensions", "--disable-setuid-sandbox", "--disable-dev-shm-usage", "--disable-gpu", "--no-zygote"] : [],
       ignoreDefaultArgs: ["--disable-extensions"],
     })
   },
-  headless: "new",
+  headless: true,
   events: ["load", "domcontentloaded", "networkidle2"],
 }
 
@@ -529,7 +529,7 @@ export const svg = {
     //Render through browser and resize height
     console.debug("metrics/svg/resize > loading svg")
     const page = await svg.resize.browser.newPage()
-    page.setViewport({width: 980, height: 980})
+    await page.setViewport({width: 980, height: 980})
     page
       .on("console", message => console.debug(`metrics/svg/resize > puppeteer > ${message.text()}`))
       .on("pageerror", error => console.debug(`metrics/svg/resize > puppeteer > ${error.message}`))
@@ -643,7 +643,7 @@ export const svg = {
     try {
       for (const [emoji, url] of Object.entries((await rest.emojis.get().catch(() => ({data: {}}))).data).map(([key, value]) => [`:${key}:`, value])) {
         if ((!emojis.has(emoji)) && (new RegExp(emoji, "g").test(rendered)))
-          emojis.set(emoji, `<img class="gemoji" src="${await imgb64(url)}" height="16" width="16" alt="" />`)
+          emojis.set(emoji, `<img class='gemoji' src='${await imgb64(url)}' height='16' width='16' alt='' />`)
       }
     }
     catch (error) {

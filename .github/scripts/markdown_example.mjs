@@ -4,7 +4,7 @@ import puppeteer from "puppeteer"
 //Setup browser
 const browser = await puppeteer.launch({
   headless: "new",
-  executablePath: process.env.PUPPETEER_BROWSER_PATH,
+  executablePath: process.env.PUPPETEER_EXECUTABLE_PATH,
   args: ["--no-sandbox", "--disable-extensions", "--disable-setuid-sandbox", "--disable-dev-shm-usage"],
   ignoreDefaultArgs: ["--disable-extensions"],
 })
